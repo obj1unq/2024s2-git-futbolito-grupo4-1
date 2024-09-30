@@ -1,0 +1,22 @@
+import objetos.*
+import wollok.game.*
+
+test "Test de levantarla" {
+  assert.notThat(lionel.estaSobreLaPelota())
+  lionel.position(game.at(5,5))
+  assert.that(lionel.estaSobreLaPelota())
+  
+  lionel.levantarla()
+  assert.equals(game.at(5,6), pelota.position())
+  
+  pelota.bajar()
+  assert.equals(game.at(5,5), pelota.position())
+
+
+}
+
+test "Test de error" {
+  assert.notThat(lionel.estaSobreLaPelota())
+  assert.throwsExceptionWithMessage("No esta sobre la pelota para hacer eso", { lionel.levantarla() })
+  
+}

@@ -16,6 +16,21 @@ object lionel {
 	method avanzar() {
 		position = game.at((game.width() - 1).min(position.x() + 1), position.y()) 
 	}
+
+	method levantarla() {
+		self.validarPosicion()
+		pelota.subir()
+	}
+
+	method validarPosicion() {
+	  if (not(self.estaSobreLaPelota())){
+	  	self.error("No esta sobre la pelota para hacer eso")
+	  }
+	}
+
+	method estaSobreLaPelota(){
+		return self.position() == pelota.position()
+	}
 	
 }
 
@@ -23,4 +38,14 @@ object lionel {
 object pelota {
 	const property image="pelota.png"
 	var property position = game.at(5,5)	
+
+	method subir() {
+	  position = game.at(position.x(), position.y() + 1)
+	  game.schedule(2000, {self.bajar()})
+	}
+
+	method bajar() {
+	  position = game.at (position.x(), position.y() - 1)
+	}
+
 }
