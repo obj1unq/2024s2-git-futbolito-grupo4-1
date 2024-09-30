@@ -1,0 +1,13 @@
+import objetos.*
+
+import wollok.game.*
+
+describe "futbolito" {
+  test "inicio" {
+    const inicio = game.at(0,5)
+    assert.notEquals(inicio, lionel.position())
+    
+  }
+}
+
+
