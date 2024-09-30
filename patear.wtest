@@ -1,0 +1,24 @@
+import objetos.*
+import game.*
+
+describe "Lionel pateando" {
+    method initialize(){
+        game.addVisual(lionel)
+	    game.addVisual(pelota)
+	    game.cellSize(40)
+	    game.width(15)
+	    game.height(10)
+    }
+  test "Lionel patear no esta sobre pelota" {
+    assert.throwsException({ lionel.patear() })
+    
+  }
+
+  test "Lionel patea y esta sobre la pelota"{
+    lionel.irAPelota()
+    lionel.patear()
+    assert.equals(8, pelota.position().x())
+  }
+
+
+}
