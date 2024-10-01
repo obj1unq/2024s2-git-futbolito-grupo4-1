@@ -1,4 +1,3 @@
-/** First Wollok example */
 import wollok.game.*
 
 
@@ -20,29 +19,25 @@ object lionel {
 		position = game.at((game.width() - 1).min(position.x() + 1), position.y()) 
 	}
 
-	method comprobarEstaSobreLaPelota(){
-		if(not self.estaSobreLaPelota()){
-			self.error("El personaje no está sobre la pelota")
-		}
+	method levantarla() {
+		self.validarSiEstaSobrePelota()
+		pelota.subir()
 	}
 
-	method estaSobreLaPelota(){
-		return self.position() == pelota.position()
-	}
 
 	method taquito(){
-		self.comprobarEstaSobreLaPelota()
+		self.validarSiEstaSobrePelota()
 		pelota.moverDeTaco()
 	}
 	method inicio() {
 		position = game.at(0,5)
 	}
 	method cambiarCamiseta() {
-		self.validarPosicion()
+		self.validarBorde()
 		self.cambiarCasaca()
 
 	}
-	method validarPosicion() {
+	method validarBorde() {
 		return if (position.x() != 0 ){
 				self.error("no esta en el borde izquierdo")
 		}
@@ -90,9 +85,19 @@ object suplente {
 	}
 }
 
+
 object pelota {
 	const property image="pelota.png"
-	var property position = game.at(5,5)
+	var property position = game.at(5,5)	
+
+	method subir() {
+	  position = game.at(position.x(), position.y() + 1)
+	  game.schedule(2000, {self.bajar()})
+	}
+
+	method bajar() {
+	  position = game.at (position.x(), position.y() - 1)
+	}
 
 	method moverDeTaco(){
 		position = game.at(0.max(position.x()-2),position.y())
