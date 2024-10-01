@@ -1,0 +1,14 @@
+import objetos.*
+import wollok.game.*
+
+describe "Test de taquito" {
+  test "Se testea que al presionar la tecla t lionel patea la pelota de taquito para atras 2 posiciones si se puede" {
+    assert.notEquals(pelota.position(),lionel.position())
+    
+    lionel.position(game.at(5,5))
+    assert.equals(pelota.position(),lionel.position())
+    
+    lionel.taquito()
+    assert.notEquals(pelota.position(),lionel.position())
+  }
+}
